@@ -17,15 +17,31 @@ class UserRegistrationView(ListCreateAPIView):
     #     if role == 'admin':
     #         queryset = Manager.objects.all()
     #         serializer_class = ManagerSerializer
-            
-        
-    def get_serializer_class(self):
-        role = self.request.data.get('role')
+    def get_queryset(self):
+        ni = self.request.data.get('ni')
+        name = self.request.data.get('name')
+        area = self.request.data.get('area')
+        cargo = self.request.data.get('cargo')
+        user = self.request.data.get('user')
+        manager = {
+            "ni":ni,
+            "name":name,
+            "area":area,
+            "cargo":cargo
+        }
+        queryset = User.objects.create_user(**user)
+        return queryset
 
-        manager = Manager.objects.all()
-        if role == 'admin':
-            serializer_class = ManagerSerializer(manager).data
-            return serializer_class
+    def get_serializer_class(self):
+        role = self.request.data.get("user")
+        serializer_class = None
+        if role['role'] == 'admin':
+            
+           
+            
+            # user = self.get_queryset().manager_account
+            serializer_class = ManagerSerializer(self.get_queryset()).data
+        return serializer_class
        
     # if User.role == 'admin':
     #     queryset = Admin.objects.all()
