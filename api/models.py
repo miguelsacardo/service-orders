@@ -11,27 +11,21 @@ class User(AbstractUser):
         ('manutentor', 'Manutentor'),
         ('user', 'User')
     )
-
+    ni = models.CharField(max_length=15, default="sn1")
+    name = models.CharField(max_length=255, default="User")
+    area = models.CharField(max_length=255, default="Area")
+    cargo = models.CharField(max_length=255, default="Cargo")
     role = models.CharField(max_length=15, choices=ROLE_CHOICES)
 
-class Manager(models.Model):    
-    ni = models.CharField(max_length=15)
-    name = models.CharField(max_length=255)
-    area = models.CharField(max_length=255)
-    cargo = models.CharField(max_length=255)
+class Manager(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="manager_account")
 
 class Maintainer(models.Model):
-    ni = models.CharField(max_length=15)
-    name = models.CharField(max_length=255)
-    area = models.CharField(max_length=255)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="maintainer_account")
     manager = models.ForeignKey(Manager, verbose_name="Manager of Maintainers", on_delete=models.CASCADE, default=1)
 
-
 class Responsible(models.Model):
-    ni = models.CharField(max_length=15)
-    name = models.CharField(max_length=255)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="normal_account", default=1)
 
 class Environment(models.Model):
     ni = models.CharField(max_length=15)
