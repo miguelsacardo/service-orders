@@ -12,7 +12,7 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # user urls -> this URL can POST and GET all users
-    path('user', UserRegistrationView.as_view()),
+    path('users', UserRegistrationView.as_view()),
 
    
 ]

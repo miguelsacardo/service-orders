@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     
 class ManagerSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    user = UserSerializer()
 
     class Meta:
         model = Manager 
@@ -22,5 +22,19 @@ class ManagerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = User.objects.create_user(**user_data)
-        admin = Manager.objects.create(user=user, **validated_data)
-        return admin
+        manager = Manager.objects.create(user=user, **validated_data)
+        return manager
+    
+class MaintainerSerializer(serializers.ModelSerializer):
+    user = UserSerializer() 
+
+    class Meta:
+        model = Maintainer
+        many = True
+        fields = '__all__'
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        user = User.objects.create_user(**user_data)
+        maintainer = Maintainer.objects.create(user=user, **validated_data)
+        return maintainer
