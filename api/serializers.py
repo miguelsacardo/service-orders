@@ -38,3 +38,24 @@ class MaintainerSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**user_data)
         maintainer = Maintainer.objects.create(user=user, **validated_data)
         return maintainer
+    
+class ResponsibleSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Responsible
+        many = True
+        fields = '__all__'
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        user = User.objects.create_user(**user_data)
+        responsible = Responsible.objects.create(user=user, **validated_data)
+        return responsible
+    
+class EnvironmentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Environment
+        many = True
+        fields = '__all__'
