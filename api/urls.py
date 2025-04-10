@@ -14,7 +14,26 @@ urlpatterns = [
     # user urls
     # POST and GET
     path('users', UserRegistrationView.as_view()),
-    # UPDATE AND DESTROY
-    path('users/<int:pk>', UserDetailView.as_view()),
+    # PATCH AND DESTROY
+    path('users/<int:userId>', UserDetailView.as_view()),
+
+    # environment urls
+    # POST and GET
+    path('environments', EnvironmentRegistrationView.as_view()),
+    # PUT and GET
+    path('environments/<int:pk>', EnvironmentDetailView.as_view()),
+
+    # patrimony urls
+    # POST and GET
+    path('patrimonies', PatrimonyRegistrationView.as_view()),
+    # PUT and GET
+    path('patrimonies/<int:pk>', PatrimonyDetailView.as_view()),
+
+    # service orders urls
+    # POST and GET
+    path('service-orders', ServiceOrderRegistrationView.as_view()),
+    # PUT and GET
+    path('service-orders/<int:pk>', ServiceOrderDetailView.as_view())
+
     
 ]

@@ -59,3 +59,17 @@ class EnvironmentSerializer(serializers.ModelSerializer):
         model = Environment
         many = True
         fields = '__all__'
+
+class PatrimonySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Patrimony
+        many = True
+        fields = '__all__'
+
+class ServiceOrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ServiceOrder
+        many = True
+        fields = '__all__'

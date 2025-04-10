@@ -11,6 +11,7 @@ class User(AbstractUser):
         ('manutentor', 'Manutentor'),
         ('user', 'User')
     )
+    userId = models.AutoField(primary_key=True)
     ni = models.CharField(max_length=15, default="sn1")
     name = models.CharField(max_length=255, default="User")
     area = models.CharField(max_length=255, default="Area")
